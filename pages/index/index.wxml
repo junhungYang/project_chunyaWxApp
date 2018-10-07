@@ -1,0 +1,9 @@
+<!--index.wxml-->
+<view class="container">
+  <view>
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  </view>
+  <view>
+    <button bindtap="shangchuan" hover-class="defaultTap">上传图片</button>
+  </view>
+</view>
