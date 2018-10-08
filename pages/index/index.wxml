@@ -1,9 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <view>
-    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+  <view class="input-box">
+    <input type="text" placeholder="我是input"  bindinput="searchGoods"/>
   </view>
-  <view>
-    <button bindtap="shangchuan" hover-class="defaultTap">上传图片</button>
+  <view class="swiper-box">
+    <my-swiper></my-swiper>
   </view>
 </view>

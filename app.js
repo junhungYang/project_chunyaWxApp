@@ -21,22 +21,23 @@ App({
     });
     // 获取用户信
   },
+  onShow(data) {
+    console.log(data)
+  },
   wxLoginApi() {
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // this.getSessionKey(res.code);
         this.getSessionKey(res.code);
       }
     });
   },
   getSessionKey(code) {
-    _GetSessionKey({code}).then(res => {
-      if (res.data.errno === 0) {
-        wx.setStorageSync("sessionKey", res.data.data.session_key);
+    _GetSessionKey({code})
+    .then(data => {
+        wx.setStorageSync("sessionKey", data.session_key);
         this.getSensitiveInfo();
-      }
-    });
+      }).catch(msg => this.showMod(msg))
   },
   getSensitiveInfo() {
     wx.getSetting({
@@ -50,12 +51,10 @@ App({
                 sessionKey,
                 encryptedData: res.encryptedData,
                 ivStr: res.iv
-              }).then(res => {
-                if(res.data.errno === 0) {
-                  wx.setStorageSync("userInfo", res.data.data);
+              }).then(data => {
+                  wx.setStorageSync("userInfo", data);
                   this.wxappLogin();
-                }
-              })
+              }).catch(msg => this.showMod(msg))
             }
           });
         }
@@ -69,11 +68,15 @@ App({
       gender: userInfo.gender,
       avatarUrl: userInfo.avatarUrl,
       nickName: userInfo.nickName
-    }).then( res => {
-      if (res.data.errno === 0) {
-        this.globalData.userInfo = res.data.data.userInfo;
-        _SetToken(res.data.data.token)
-      }
+    }).then( data => {
+        this.globalData.userInfo = data.userInfo;
+        _SetToken(data.token)
+    }).catch( msg => this.showMod(msg))
+  },
+  showMod(msg) {
+    wx.showModal({
+      title: 'Error',
+      content: msg
     })
   },
   globalData: {
