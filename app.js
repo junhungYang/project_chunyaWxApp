@@ -11,8 +11,8 @@ App({
     wx.checkSession({
       success: () => {
         //未过期
-        this.wxappLogin();
-        // this.wxLoginApi();
+        // this.wxappLogin();
+        this.wxLoginApi();
       },
       fail: () => {
         //已过期
@@ -21,14 +21,14 @@ App({
     });
     // 获取用户信
   },
-  onShow(data) {
-    console.log(data)
-  },
   wxLoginApi() {
+
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         this.getSessionKey(res.code);
+      },
+      fail: res => {
       }
     });
   },
@@ -77,6 +77,25 @@ App({
     wx.showModal({
       title: 'Error',
       content: msg
+    })
+  },
+  setWatcher(data, watch) {
+    Object.keys(watch).forEach(v => {
+      this.observe(data, v, watch[v]);
+    })
+  },
+  observe(obj, key, watchFun) {
+    var val = obj[key];
+    Object.defineProperty(obj, key, {
+      configurable: true,
+      enumerable: true,
+      set: function (value) {
+        val = value;
+        watchFun(value, val)
+      },
+      get: function () {
+        return val
+      }
     })
   },
   globalData: {

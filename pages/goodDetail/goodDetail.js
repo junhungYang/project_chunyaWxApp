@@ -1,20 +1,40 @@
-// pages/index/cart.js
+// pages/goodDetail/goodDetail.js
+import {_GoodsDetail} from '../../utils/request'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    detail:{},
+    htmlStr:'',
+    prodListFlag:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    _GoodsDetail({id:options.goodId}).then(data => {
+      this.setData({
+        detail:data
+      })
+      console.log(this.data.detail.productList);
+    })
+  },
+  openProdList() {
+    this.setData({
+      prodListFlag:false
+    })
+  },
+  closeProdList() {
+    this.setData({
+      prodListFlag: true
+    })
+  },
+  cartAdd() {
 
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

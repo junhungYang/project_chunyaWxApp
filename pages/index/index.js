@@ -5,9 +5,26 @@ const app = getApp()
 Page({
   data: {
     name: "junxing",
-    background: ["demo-text-1", "demo-text-2", "demo-text-3"]
+    background: ["demo-text-1", "demo-text-2", "demo-text-3"],
+    goodsList:[]
   },
-  shangchuan() {
+  onLoad() {
+    _GoodsList({
+      page:1,
+      size:10
+    }).then(data => {
+      this.setData({
+        goodsList:data.data
+      })
+    })
+  },
+  navToGoodDetail(e) {
+    let goodId = e.currentTarget.dataset.goodid
+    wx.navigateTo({
+      url:`../goodDetail/goodDetail?goodId=${goodId}`
+    })
+  },
+  shangchuan() {  
     wx.chooseImage({
       success: res => {
         let token = app.globalData.token;

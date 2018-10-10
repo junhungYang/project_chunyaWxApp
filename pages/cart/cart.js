@@ -1,17 +1,26 @@
 // pages/cart/cart.js
+import {_CartIndex} from '../../utils/request'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: 'junxing'
+    name: 'junxing',
+    cartList:[],
+    couponInfoList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    _CartIndex().then(data => {
+      this.setData({
+        cartList: data.cartList,
+        couponInfoList: data.couponInfoList
+      });
+    })
 
   },
 

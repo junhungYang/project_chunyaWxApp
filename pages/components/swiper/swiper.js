@@ -19,8 +19,7 @@ Component({
             // wx.setData({
             //     background:data.adList
             // })
-            console.log(this.data.background = data.adList)
-            console.log()
+    
         })
         .catch(msg => {
             wx.showModal({

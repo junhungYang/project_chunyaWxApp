@@ -3,6 +3,7 @@ const GlobalUrl = "https://shop.chunyajkkj.com/ch/";
 var Token = "";
 const _SetToken = function(token) {
   Token = token;
+  console.log(Token)
 };
 
 const _GetSessionKey = function(data) {
@@ -140,7 +141,7 @@ const _PositionSave = function(data) {
       },
       success: res => {
         if (res.data.errno === 0) {
-          resolve(res.data.datas);
+          resolve(res.data.data);
         } else {
           reject(res.data.errmsg);
         }
@@ -296,11 +297,13 @@ const _OrderSubmit = function(data) {
 };
 
 const _OrderCheckout = function(data) {
+  let url = data ? 
+    `${GlobalUrl}api/cart/checkout?couponId=${data.couponId}` :
+    `${GlobalUrl}api/cart/checkout`
   return new Promise((resolve, reject) => {
     wx.request({
-      url: `${GlobalUrl}api/cart/checkout`,
-      data: data,
-      method: "POST",
+      url: url,
+      method: "GET",
       header: {
         "Content-Type": "application/x-www-form-urlencoded",
         "X-Nideshop-Token": Token
@@ -578,6 +581,9 @@ const _CartIndex = function () {
     return new Promise((resolve, reject) => {
         wx.request({
           url: `${GlobalUrl}api/cart/index`,
+          header: {
+            "X-Nideshop-Token": Token
+          },
           method: "GET",
           success: res => {
             if (res.data.errno === 0) {

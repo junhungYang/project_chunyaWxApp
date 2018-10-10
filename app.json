@@ -1,11 +1,14 @@
 {
   "pages": [
+    "pages/goodDetail/goodDetail",
     "pages/index/index",
-    "pages/cart/cart",
-    "pages/userCenter/userCenter",
     "pages/goods/goods",
+      "pages/userCenter/userCenter",
+    "pages/cart/cart",
     "pages/healthService/healthService",
-    "pages/VIPcenter/VIPcenter"
+    "pages/VIPcenter/VIPcenter",
+    "pages/test/test"
+   
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -30,6 +33,10 @@
       {
           "pagePath":"pages/userCenter/userCenter",
           "text":"我的"
+      },
+      {
+        "pagePath": "pages/test/test",
+        "text": "test"
       }
     ]
   }

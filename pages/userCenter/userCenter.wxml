@@ -1,2 +1,2 @@
 <!--pages/userCenter/userCenter.wxml-->
-<text>pages/userCenter/userCenter.wxml</text>
+<button bindtap="pay1">微信支付</button>
